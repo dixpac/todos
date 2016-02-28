@@ -8,9 +8,12 @@ class TodosController < ApplicationController
   end
 
   def create
-    byebug
-    Todo.create(todo_params)
-    redirect_to todos_path
+    @todo = Todo.new(todo_params)
+    if @todo.save
+      redirect_to todos_path
+    else
+      render :new
+    end
   end
 
   private
